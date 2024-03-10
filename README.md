@@ -58,6 +58,7 @@ cat chinook_db_backup.sql | docker exec -i superset-db psql -U skovorodko -d chi
 
 
 
-**База данных** \\ Chinook_PostgreSql.sql : https://github.com/lerocha/chinook-database
+**База данных** 
+Chinook_PostgreSql.sql : https://github.com/lerocha/chinook-database
 
 
