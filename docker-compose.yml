@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  superset-db:
+    image: postgres:10
+    container_name: superset-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_USER: skovorodko
+      POSTGRES_PASSWORD: alexander
+    volumes:
+      - superset_db_data:/var/lib/postgresql/data
+
+  superset:
+    image: apache/superset
+    container_name: superset
+    restart: unless-stopped
+    depends_on:
+      - superset-db
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_DB_URI: "postgresql+psycopg2://superset:superset@superset-db/superset"
+      SUPERSET_LOAD_EXAMPLES: "1"
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+      - superset_home:/app/superset_home
+
+volumes:
+  superset_home:
+  superset_db_data:
